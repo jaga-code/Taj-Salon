@@ -87,7 +87,7 @@ nav {
 
   .con-1{
    
-    background-image:url('images/conbgimg2.png');
+    background-image:url('/images/conbgimg2.png');
     background-repeat:no-repeat;
     background-size: cover;
     background-attachment: fixed;
