@@ -1,38 +1,52 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
+import "../taj.css"; 
 
-export default function SignIn() {
-  const [form, setForm] = useState({ email: "", password: "" });
+export default function SignInForm({ setIsSignedIn}) {
+  const [login, setLogin] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setLogin({ ...login, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      });
-      const data = await res.json();
-      if (res.ok) setMessage("Sign in successful!");
-      else setMessage(data.message || "Sign in failed");
-    } catch (err) {
-      setMessage("Error signing in");
+    if (login.email === "admin@example.com" && login.password === "1234") {
+      setMessage("Signed in successfully!");
+      setIsSignedIn(true);
+      navigate("/book");
+    } else {
+      setMessage("Invalid email or password");
     }
   };
 
   return (
-    <div className="signin-form">
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-        <input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} required />
-        <button type="submit">Sign In</button>
-      </form>
-      {message && <p>{message}</p>}
+    <div className="signin-container">
+      <div className="signin-card">
+        <h2>Sign In</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={login.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={login.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Sign In</button>
+        </form>
+        {message && <p className="message">{message}</p>}
+      </div>
     </div>
   );
 }

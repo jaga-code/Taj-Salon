@@ -1,15 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation} from "react-router-dom";
+import "../taj.css";
 
 export default function Header() {
+	const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleBookNow = () => {
+    navigate("/book");
+  };
 	return (
-		<header>
+		<header className="header">
+     
+		
+       <Link to="/" className="nav-link">Home</Link>
+	  
+        {location.pathname === "/" && (
 			<nav>
-				<Link to="/" aria-label="Home">Home</Link>
-				<a href="#con-3">Services</a>
-				<a href="#con-4">Location</a>
-				<a href="#footer-contact">Contact</a>
-			</nav>
+				<Link to="#con-3">Services</Link>
+				<Link to ="#con-4">Location</Link>
+				<Link to ="#foot">Contact</Link>
+			 </nav>
+		)}
+		
+		
+ 
+  
+
+
+     
 			<div className="bnow">
 				<Link to="/book">Book Now</Link>
 			</div>

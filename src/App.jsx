@@ -1,6 +1,6 @@
-
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import "./taj.css";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Services from "./components/Services";
 import Footer from "./components/Footer";
@@ -8,11 +8,13 @@ import BookingForm from "./components/BookingForm";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 
+/* ---------------- HOME PAGE ---------------- */
 function Home() {
 	return (
 		<>
-			{/* Hero / Banner (kept inline for now) */}
+			{/* Hero / Banner */}
 			<section className="con-1" aria-label="Hero banner" />
+
 			{/* Video Section */}
 			<section className="con-2" aria-label="Intro video">
 				<div className="con-22">
@@ -30,9 +32,11 @@ function Home() {
 					</video>
 				</div>
 			</section>
-			{/* Services (now its own component) */}
+
+			{/* Services Section */}
 			<Services />
-			{/* Locations (kept inline for now) */}
+
+			{/* Locations Section */}
 			<section className="con-4" id="con-4" aria-label="Our locations">
 				<div id="map">
 					<p className="mapp">location of our saloons</p>
@@ -57,17 +61,39 @@ function Home() {
 	);
 }
 
+/* ---------------- REDIRECT COMPONENT ---------------- */
+function SignInRedirect() {
+	const navigate = useNavigate();
+	useEffect(() => {
+		navigate("/SignIn");
+	}, [navigate]);
+	return null;
+}
+
+/* ---------------- MAIN APP ---------------- */
 export default function App() {
+	const [isSignedIn, setIsSignedIn] = useState(false);
+
 	return (
 		<Router>
 			<Header />
 			<Routes>
+				{/* Homepage */}
 				<Route path="/" element={<Home />} />
-				<Route path="/book" element={<BookingForm />} />
-				<Route path="/signin" element={<SignIn />} />
+
+				{/* Sign In / Sign Up */}
+				<Route path="/signin" element={<SignIn setIsSignedIn={setIsSignedIn} />} />
 				<Route path="/signup" element={<SignUp />} />
+
+				{/* Protected Booking Route */}
+				<Route
+					path="/book"
+					element={isSignedIn ? <BookingForm /> : <SignInRedirect />}
+				/>
 			</Routes>
 			<Footer />
 		</Router>
 	);
 }
+
+
