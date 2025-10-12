@@ -27,7 +27,7 @@ function Home() {
 						playsInline
 						style={{ borderRadius: 20, boxShadow: "0 8px 20px rgba(0,0,0,0.2)" }}
 					>
-						<source src="/images/Tajv.mp4" type="video/mp4" />
+						<source src="/images/tajv.mp4" type="video/mp4" />
 						Your browser does not support this video tag.
 					</video>
 				</div>
