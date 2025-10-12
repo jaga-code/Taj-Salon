@@ -27,3 +27,15 @@ node_modules/
 dist/
 .vite/
 .env
+echo "node_modules/
+dist/
+.vite/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.log
+.DS_Store
+.vscode/
+.idea/" 
