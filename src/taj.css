@@ -5,14 +5,14 @@ html {
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image:url('images/bgimg4.png');
+    background-image:url('public/images/bgimg4.png');
     background-repeat:no-repeat;
     background-size: cover;
     background-attachment: fixed;
   }
   
   header {
-    background-image:url('images/taj10.png');
+    background-image:url('public/images/taj10.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
