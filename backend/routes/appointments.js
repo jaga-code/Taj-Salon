@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const Appointment = require('../models/Appointment');
+const Appointment = require('../models/Booking');
 
 // Book appointment
 router.post('/', async (req, res) => {
   try {
-    const { customer, date, service, notes } = req.body;
-    const appointment = new Appointment({ customer, date, service, notes });
-    await appointment.save();
-    res.status(201).json({ message: 'Appointment booked' });
+    const { name, email, date, time, service, notes } = req.body;
+    const booking = new Booking({ name, email, date, time, service, notes });
+    await booking.save();
+    res.status(201).json({ message: 'Appointment booked successfully!' });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error(err);
+    res.status(500).json({ message: 'Booking failed', error: err.message });
   }
 });
 
