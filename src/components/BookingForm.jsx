@@ -1,10 +1,6 @@
 
-
 import React, { useState } from "react";
 import "../taj.css";
-
-
-
 export default function BookingForm() {
   const [form, setForm] = useState({ name: "", email: "", date: "",time:"", service: "", notes: "" });
   const [message, setMessage] = useState("");
@@ -18,13 +14,13 @@ export default function BookingForm() {
     // TODO: Replace with actual customer ID and API endpoint
     const customer = "demo-customer-id";
     try {
-      const res = await fetch("/api/appointments", {
+      const res = await fetch("http://localhost:5000/api/appointments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, customer })
       });
       const data = await res.json();
-      if (res.ok) setMessage("Appointment booked!");
+      if (res.ok) setMessage("Appointment booked successfully!");
       else setMessage(data.message || "Booking failed");
     } catch (err) {
       setMessage("Error booking appointment");
